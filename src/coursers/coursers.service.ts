@@ -19,7 +19,7 @@ export class CoursersService {
     return await this.courseRepository.find({ relations: ['tags'] });
   }
 
-  async findById(id: number) {
+  async findById(id: string) {
     const course = await this.courseRepository.findOne({
       where: { id },
       relations: ['tags'],
@@ -38,10 +38,10 @@ export class CoursersService {
       ...createCourseDTO,
       tags,
     });
-    return await this.courseRepository.save(course);
+    return this.courseRepository.save(course);
   }
 
-  async update(id: number, updateCourseDTO: UpdateCourseDTO) {
+  async update(id: string, updateCourseDTO: UpdateCourseDTO) {
     const tags =
       updateCourseDTO.tags &&
       (await Promise.all(
@@ -58,7 +58,7 @@ export class CoursersService {
     return this.courseRepository.save(course);
   }
 
-  async delete(id: number) {
+  async delete(id: string) {
     const course = await this.courseRepository.findOne({ where: { id } });
     if (!course) {
       throw new NotFoundException(`Course ID ${id} not found!`);

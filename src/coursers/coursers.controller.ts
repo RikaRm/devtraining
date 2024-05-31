@@ -18,13 +18,11 @@ export class CoursersController {
   @Get()
   findAll() {
     return this.courseService.findAll();
-    // return response.status(200).json({ message: 'listagem de cursos' });
   }
 
   @Get(':id')
-  findById(@Param('id') id: number) {
+  findById(@Param('id') id: string) {
     return this.courseService.findById(id);
-    // return `O curso que você pesquisou é ${params.id} e a classe é ${params.classe}`;
   }
 
   @Post()
@@ -33,13 +31,13 @@ export class CoursersController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: number, @Body() updateCourseDTO: UpdateCourseDTO) {
+  update(@Param('id') id: string, @Body() updateCourseDTO: UpdateCourseDTO) {
     return this.courseService.update(id, updateCourseDTO);
   }
 
   @Delete(':id')
   @HttpCode(204)
-  remove(@Param('id') id: number) {
+  remove(@Param('id') id: string) {
     return this.courseService.delete(id);
   }
 }
